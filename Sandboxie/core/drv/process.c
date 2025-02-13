@@ -789,7 +789,7 @@ _FX PROCESS *Process_Create(
     // check certificate
     //
 
-    if (!Verify_CertInfo.opt_sec && !proc->image_sbie) {
+    if (1) {
 
         const WCHAR* exclusive_setting = NULL;
         if (proc->use_security_mode)
@@ -813,7 +813,7 @@ _FX PROCESS *Process_Create(
 
     }
 
-    if (!Verify_CertInfo.opt_enc && !proc->image_sbie) {
+    if (1) {
         
         const WCHAR* exclusive_setting = NULL;
         if (proc->confidential_box)
@@ -1263,18 +1263,14 @@ _FX BOOLEAN Process_NotifyProcess_Create(
         BOX* breakout_box = NULL;
 
         if (box && Process_IsBreakoutProcess(box, ImagePath)) {
-            if(!Verify_CertInfo.active)
-                Log_Msg_Process(MSG_6004, box->name, L"BreakoutProcess", box->session_id, CallerId);
-            else {
-                UNICODE_STRING image_uni;
-                RtlInitUnicodeString(&image_uni, ImagePath);
-                if (!Box_IsBoxedPath(box, file, &image_uni)) {
-
-                    check_forced_program = TRUE; // the breakout process of one box may be the forced process of another
-                    breakout_box = box;
-                    box = NULL;
-                }
-            }
+		UNICODE_STRING image_uni;
+		RtlInitUnicodeString(&image_uni, ImagePath);
+		if (!Box_IsBoxedPath(box, file, &image_uni)) {
+	
+		    check_forced_program = TRUE; // the breakout process of one box may be the forced process of another
+		    breakout_box = box;
+		    box = NULL;
+		}
         }
 #endif
 
