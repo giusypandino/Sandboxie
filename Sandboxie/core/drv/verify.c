@@ -806,7 +806,7 @@ _FX NTSTATUS KphValidateCertificate()
         Mem_Free(blocklist, blocklist_len);
     }
 
-    if (true) {
+    if (1) {
 
         Verify_CertInfo.active = 1;
 
