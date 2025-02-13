@@ -844,7 +844,7 @@ _FX NTSTATUS KphValidateCertificate()
         LARGE_INTEGER expiration_date = { 0 };
         Verify_CertInfo.type = eCertEternal;
  	Verify_CertInfo.level = eCertMaxLevel;
-
+	Verify_CertInfo.grace_period = 0;
         if(CertDbg)     DbgPrint("Sbie Cert type: %X\n", Verify_CertInfo.type);
 
         expiration_date.QuadPart = cert_date.QuadPart + KphGetDateInterval(0, 0, 5);         
